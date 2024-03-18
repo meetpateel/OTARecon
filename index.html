@@ -1,150 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-		<title>OTA Recon</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Added Inter font for a modern touch -->
-		<style>
-			html {
-				scroll-behavior: smooth;
-				font-family: sans-serif;  /* Font set to sans-serif */
-			}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>OTA Recon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Added Inter font for a modern touch -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            font-family: sans-serif; /* Font set to sans-serif */
+        }
 
-			body {
-				padding-top: 50px;
-			}
+        body {
+            padding-top: 50px;
+        }
 
-			h1, h2, h3, p {
-				margin-bottom: 1rem;
-			}
+        h1, h2, h3, p {
+            margin-bottom: 1rem;
+        }
 
-			.pricing-card, .contact-section {
-				background-color: #FFEDD9; /* Slightly darker shade for cards and sections */
-				border-radius: 8px; /* Rounded corners for a softer look */
-			}
+        .pricing-card, .contact-section {
+            background-color: #FFEDD9; /* Slightly darker shade for cards and sections */
+            border-radius: 8px; /* Rounded corners for a softer look */
+        }
 
-			.cta-button {
-				background-color: #FFA500; /* Strong orange for CTAs */
-			}
+        .cta-button {
+            background-color: #FFA500; /* Strong orange for CTAs */
+        }
 
-			/* Styles for the header */
-			header {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				z-index: 1000;
-				background-color: #FFFFFF;  /* Solid white background */
-				transition: box-shadow 0.3s ease; /* smooth transition */
-			}
+        /* Styles for the header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #FFFFFF; /* Solid white background */
+            transition: box-shadow 0.3s ease; /* smooth transition */
+        }
 
-			header a, header .menu-icon div {
-				color: #000000;  /* Black text */
-			}
+            header a, header .menu-icon div {
+                color: #000000; /* Black text */
+            }
 
-			/* Add shadow when class .scrolled is added to the header */
-			header.scrolled {
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* adjust as needed */
-			}
-			section::before {
-				content: "";
-				display: block;
-				height: 80px;  /* height of your fixed header */
-				margin-top: -80px;  /* negative value of the height */
-				visibility: hidden;
-				pointer-events: none;
-			}
-			.anchor-offset:before {
-				content: "";
-				display: block;
-				height: 80px; /* Adjust this height according to your navigation bar's height */
-				margin: -80px 0 0; /* This negative margin will pull the content up by the same amount */
-				visibility: hidden;
-				pointer-events: none;
-			}
-			h1, h2, h3, p {
-				margin-bottom: 1.5rem; /* Increased spacing */
-			}
+            /* Add shadow when class .scrolled is added to the header */
+            header.scrolled {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* adjust as needed */
+            }
 
-			.cta-button {
-				background-color: #17087a;
-				transition: all 0.3s; /* Smooth transition */
-			}
+        section::before {
+            content: "";
+            display: block;
+            height: 80px; /* height of your fixed header */
+            margin-top: -80px; /* negative value of the height */
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-			.cta-button:hover {
-				background-color: #17087a; /* Slight darkening on hover */
-				transform: translateY(-2px); /* Subtle lift on hover */
-			}
+        .anchor-offset:before {
+            content: "";
+            display: block;
+            height: 80px; /* Adjust this height according to your navigation bar's height */
+            margin: -80px 0 0; /* This negative margin will pull the content up by the same amount */
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-			#menuToggle.active {
-				border: 2px solid #17087a; /* Using the CTA color for consistency */
-				border-radius: 5px;
-			}
+        h1, h2, h3, p {
+            margin-bottom: 1.5rem; /* Increased spacing */
+        }
 
-			.hamburger .line {
-				width: 25px;
-				height: 2px;
-				background-color: #333333;
-				margin: 3px 0;
-				transition: all 0.3s;
-			}
+        .cta-button {
+            background-color: #17087a;
+            transition: all 0.3s; /* Smooth transition */
+        }
 
-			.hamburger.active .line1, .hamburger.active .line2 {
-				background-color: #17087a; /* Using the CTA color */
-			}
+            .cta-button:hover {
+                background-color: #17087a; /* Slight darkening on hover */
+                transform: translateY(-2px); /* Subtle lift on hover */
+            }
 
-			/* Animation for the main content to make it appear smoothly */
-			@keyframes fadeInUp {
-				from {
-					opacity: 0;
-					transform: translateY(20px);
-				}
+        #menuToggle.active {
+            border: 2px solid #17087a; /* Using the CTA color for consistency */
+            border-radius: 5px;
+        }
 
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
+        .hamburger .line {
+            width: 25px;
+            height: 2px;
+            background-color: #333333;
+            margin: 3px 0;
+            transition: all 0.3s;
+        }
 
-			main, section {
-				animation: fadeInUp 1s forwards;
-			}
+        .hamburger.active .line1, .hamburger.active .line2 {
+            background-color: #17087a; /* Using the CTA color */
+        }
 
-			/* Rounded edges for the input fields in the contact form for a modern touch */
-			input, textarea {
-				border-radius: 8px;
-			}
-		</style>
-	</head>
+        /* Animation for the main content to make it appear smoothly */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-   <body>
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main, section {
+            animation: fadeInUp 1s forwards;
+        }
+
+        /* Rounded edges for the input fields in the contact form for a modern touch */
+        input, textarea {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
     <!-- Header -->
-    <header class="bg-white p-5 fixed top-0 left-0 w-full z-50">
-		<div class="container mx-auto flex flex-wrap justify-between items-center">
-         <!---- 
+    <header class="bg-white p-3 fixed top-0 left-0 w-full z-50">
+        <!-- Reduced padding for a slimmer header -->
+        <div class="container mx-auto flex flex-wrap justify-between items-center">
             <div class="flex items-center space-x-2">
-                <a href="./index.html" 
-				 class="text-2xl font-semibold text-blue-500 hover:text-blue-600" aria-label="home">OTA Recon</a>
-            </div> -->
-			<div class="flex items-center space-x-2">
-				<!-- Image within an anchor tag acting as a logo -->
-				<a href="./index.html" class="inline-block">
-					<img src="ota.png" alt="Logo" class="w-25 h-40"> <!-- Adjust w-8 h-8 to control the size -->
-				</a>
-				<!-- Existing link -->
-				<a href="./index.html" class="text-xl font-semibold text-blue-500 hover:text-blue-600" aria-label="home"></a>
-			</div>
-			
+                <!-- Adjusted logo size for a more proportional appearance -->
+                <a href="./index.html" class="inline-block">
+                    <img src="ota.png" alt="Logo" class="w-20 h-20"> <!-- Adjusted width (w) and height (h) -->
+                </a>
+                <!-- If you intend to use a text link as a logo or alongside it, adjust here -->
+                <a href="./index.html" class="text-xl font-semibold text-blue-500 hover:text-blue-600" aria-label="home"></a> <!-- Added text for clarity, adjust as necessary -->
+            </div>
+
             <!-- Desktop Navigation Links -->
-            <div class="flex items-center space-x-9 hidden md:flex">
-                <nav class="flex space-x-9">
+            <div class="flex items-center space-x-5 hidden md:flex">
+                <!-- Adjusted spacing between navigation links -->
+                <nav class="flex space-x-5">
+                    <!-- Adjusted spacing between navigation links -->
                     <a href="#homeSection" class="text-gray-900 hover:text-blue-900">Home</a>
                     <a href="#pricingSection" class="text-gray-900 hover:text-blue-900">Pricing</a>
                     <a href="#contactSection" class="text-gray-900 hover:text-blue-900">Contact</a>
                 </nav>
-                <a class="cta-button text-white px-5 py-2 rounded ml-4 hover:shadow-lg" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+                <a class="cta-button text-white px-4 py-2 rounded ml-4 hover:shadow-lg" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a> <!-- Adjusted padding for a slightly smaller button -->
             </div>
             <!-- Mobile Hamburger Menu -->
             <button id="menuToggle" class="hamburger md:hidden p-2">
@@ -156,25 +157,27 @@
             </button>
         </div>
         <!-- Mobile Navigation Menu -->
-        <nav id="navMenu" class="hidden md:hidden w-full mt-4 transition-all duration-300">
-            <a href="#homeSection" class="block text-gray-700 hover:text-blue-600 mb-4">Home</a>
-            <a href="#pricingSection" class="block text-gray-700 hover:text-blue-600 mb-4">Pricing</a>
-            <a href="#contactSection" class="block text-gray-700 hover:text-blue-600 mb-4">Contact</a>
-            <a class="cta-button block text-white py-2 text-center rounded w-full mb-4 hover:shadow-lg" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        <nav id="navMenu" class="hidden md:hidden w-full mt-2 transition-all duration-300">
+            <!-- Adjusted margin-top for a tighter layout -->
+            <a href="#homeSection" class="block text-gray-700 hover:text-blue-600 mb-3">Home</a> <!-- Adjusted margin-bottom for tighter link spacing -->
+            <a href="#pricingSection" class="block text-gray-700 hover:text-blue-600 mb-3">Pricing</a>
+            <a href="#contactSection" class="block text-gray-700 hover:text-blue-600 mb-3">Contact</a>
+            <a class="cta-button block text-white py-2 text-center rounded w-full mb-3 hover:shadow-lg" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a>
         </nav>
     </header>
+
     <!-- Main Content -->
     <main id="homeSection" class="container mx-auto p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
         <!-- Home Section Content -->
         <div class="bg-grey-100 p-8 rounded-lg shadow-md">
             <!-- Header and Sub-header -->
-			<div class="text-center mb-6">
-				<h1 class="text-5xl font-bold text-blue-900">Perfect Your Bookings</h1>
-				<p class="text-black-300 mt-4 text-lg">Automatically match third-party reservations to your PMS. Effortless. Accurate. Streamlined.</p>
-			</div>
-			<div class="mt-8 text-center">
-				<a class="bg-transparent hover:bg-blue-900 text-bg-blue-900 font-semibold hover:text-white py-3 px-5 border border-bg-blue-900 hover:border-transparent rounded text-2xl" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Get Started</a>
-			</div>
+            <div class="text-center mb-6">
+                <h1 class="text-5xl font-bold text-blue-900">Perfect Your Bookings</h1>
+                <p class="text-black-300 mt-4 text-lg">Automatically match third-party reservations to your PMS. Effortless. Accurate. Streamlined.</p>
+            </div>
+            <div class="mt-8 text-center">
+                <a class="bg-transparent hover:bg-blue-900 text-bg-blue-900 font-semibold hover:text-white py-3 px-5 border border-bg-blue-900 hover:border-transparent rounded text-2xl" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Get Started</a>
+            </div>
             <!-- Benefits -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <div class="flex flex-col items-center">
@@ -198,178 +201,179 @@
             </div>
         </div>
     </main>
-	
-	<!-- How It Works Section -->
-	<section class="container mx-auto mt-10 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
-		<div class="bg-white rounded-lg shadow-md p-8">
-			<!-- Section Heading -->
-			<h2 class="text-5xl font-bold text-center mb-8 text-blue-900">How It Works</h2>
 
-			<div class="flex flex-wrap justify-center items-center gap-4">
-				<!-- First Column -->
-				<div class="flex flex-col items-center w-full md:w-1/4">
-					<img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-52.svg" alt="cybersecurity data repository" class="mb-4 w-32 h-32">
-					<h4 class="text-center mb-4">Leave your data in <strong class="text-yellow-500">your technologies</strong>…</h4>
-					<p class="text-center">Cloud Services <br>SaaS Apps <br>On-prem Infrastructure</p>
-				</div>
-				<!-- Arrow -->
-				<div class="hidden md:block w-16">
-					<img src="https://www.query.ai/wp-content/uploads/2022/12/arrow.svg" alt="horizontal arrow">
-				</div>
-				<!-- Second Column -->
-				<div class="flex flex-col items-center w-full md:w-1/4">
-					<img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-08-3.svg" alt="federated search api integration" class="mb-4 w-32 h-32">
-					<h4 class="text-center mb-4">Query <strong class="text-yellow-400">manages</strong>…</h4>
-					<p class="text-center">API Integrations <br>Search Translations <br>Normalization of Results</p>
-				</div>
-				<!-- Arrow -->
-				<div class="hidden md:block w-16">
-					<img src="https://www.query.ai/wp-content/uploads/2022/12/arrow.svg" alt="horizontal arrow">
-				</div>
-				<!-- Third Column -->
-				<div class="flex flex-col items-center w-full md:w-1/4">
-					<img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-49-2.svg" alt="effective investigation team" class="mb-4 w-32 h-32">
-					<h4 class="text-center mb-4">Your team <strong class="text-yellow-500">gets</strong>…</h4>
-					<p class="text-center">More Visibility <br>Expanded Context <br>Fast Answers & Insights</p>
-				</div>
-			</div>
-		</div>
-	</section>
-  <!-- Pricing Section -->
-	<section id="pricingSection" class="container mx-auto mt-16 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
-		<div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <div class="text-center">
-            <h2 class="text-5xl font-bold mb-8 text-blue-900">Get Started</h2>
-        </div>
-        <!-- Pricing Card -->
-        <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-            <h3 class="text-3xl font-semibold text-center mb-4">Hotel Recon (Popular)</h3>
-            <p class="text-center" class = "lead">Automated notes and structured information for every OTA reservation.</p>
-            <ul class = "text-center">
-                <li class="mb-2">Generative Feedback</li>
-                <li class="mb-2">Automatic Updates</li>
-                <li class="mb-2">24/7 Support</li>
-            </ul>
-            <div class="text-center mb-6">
-                <span class="text-3xl font-bold">$25</span>
-                <span class="text-black-600">/ month/ per client</span>
+    <!-- How It Works Section -->
+    <section class="container mx-auto mt-10 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <!-- Section Heading -->
+            <h2 class="text-5xl font-bold text-center mb-8 text-blue-900">How It Works</h2>
+
+            <div class="flex flex-wrap justify-center items-center gap-4">
+                <!-- First Column -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-52.svg" alt="cybersecurity data repository" class="mb-4 w-32 h-32">
+                    <h4 class="text-center mb-4">Leave your data in <strong class="text-yellow-500">your technologies</strong>…</h4>
+                    <p class="text-center">Cloud Services <br>SaaS Apps <br>On-prem Infrastructure</p>
+                </div>
+                <!-- Arrow -->
+                <div class="hidden md:block w-16">
+                    <img src="https://www.query.ai/wp-content/uploads/2022/12/arrow.svg" alt="horizontal arrow">
+                </div>
+                <!-- Second Column -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-08-3.svg" alt="federated search api integration" class="mb-4 w-32 h-32">
+                    <h4 class="text-center mb-4">Query <strong class="text-yellow-400">manages</strong>…</h4>
+                    <p class="text-center">API Integrations <br>Search Translations <br>Normalization of Results</p>
+                </div>
+                <!-- Arrow -->
+                <div class="hidden md:block w-16">
+                    <img src="https://www.query.ai/wp-content/uploads/2022/12/arrow.svg" alt="horizontal arrow">
+                </div>
+                <!-- Third Column -->
+                <div class="flex flex-col items-center w-full md:w-1/4">
+                    <img src="https://www.query.ai/wp-content/uploads/2022/12/query-icons_2022-12-08-49-2.svg" alt="effective investigation team" class="mb-4 w-32 h-32">
+                    <h4 class="text-center mb-4">Your team <strong class="text-yellow-500">gets</strong>…</h4>
+                    <p class="text-center">More Visibility <br>Expanded Context <br>Fast Answers & Insights</p>
+                </div>
             </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section id="pricingSection" class="container mx-auto mt-16 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
+        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
             <div class="text-center">
-                <a class="bg-blue-900 hover:bg-blue-900 text-white font-bold py-2 px-4 border border-blue-900 rounded" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+                <h2 class="text-5xl font-bold mb-8 text-blue-900">Get Started</h2>
             </div>
-        </div>
-    </div>
-	</section>
-
-	<!-- Contact Us Section -->
-	<section id="contactSection" class="container mx-auto mt-16 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
-		<div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <!-- Heading -->
-        <div class="text-center">
-            <h1 class="text-5xl font-bold text-blue-900">Get In Touch</h1>
-        </div>
-		<span class="border border-primary">
-        <!-- Contact Form -->
-        <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-            <h2 class="text-3xl mb-4">Drop us a message</h2>
-            <p class="text-black-600 mb-6">We'll respond as soon as possible.</p>
-            <form>
-                <div class="mb-4">
-                    <input type="text" placeholder="Full Name" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
-                </div>
-                <div class="mb-4">
-                    <input type="text" placeholder="Title" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
-                </div>
-                <div class="mb-4">
-                    <input type="email" placeholder="Work Email" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
-                </div>
-                <div class="mb-4">
-                    <input type="text" placeholder="Subject" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
-                </div>
-                <div class="mb-6">
-                    <textarea placeholder="Message" rows="4" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900"></textarea>
+            <!-- Pricing Card -->
+            <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <h3 class="text-3xl font-semibold text-center mb-4">Hotel Recon (Popular)</h3>
+                <p class="text-center" class="lead">Automated notes and structured information for every OTA reservation.</p>
+                <ul class="text-center">
+                    <li class="mb-2">Generative Feedback</li>
+                    <li class="mb-2">Automatic Updates</li>
+                    <li class="mb-2">24/7 Support</li>
+                </ul>
+                <div class="text-center mb-6">
+                    <span class="text-3xl font-bold">$25</span>
+                    <span class="text-black-600">/ month/ per client</span>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="cta-button text-white px-6 py-2.5 rounded-full hover:shadow-lg">Submit</button>
+                    <a class="bg-blue-900 hover:bg-blue-900 text-white font-bold py-2 px-4 border border-blue-900 rounded" href="https://calendly.com/meet-pateel/30min" role="button" target="_blank" rel="noopener noreferrer">Book a Demo</a>
                 </div>
-            </form>
+            </div>
         </div>
-		</span>
-    </div>
-	</section>
-	<!-- Footer Section -->
-	<footer class="mt-16 bg-gray-900 text-white py-6">
-		<div class="container mx-auto text-center">
-        <div class="mb-4">
-            <h2 class="text-2xl font-bold">OTA Recon</h2>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contactSection" class="container mx-auto mt-16 p-4 sm:p-5 anchor-offset pt-20 mt-[-20]">
+        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <!-- Heading -->
+            <div class="text-center">
+                <h1 class="text-5xl font-bold text-blue-900">Get In Touch</h1>
+            </div>
+            <span class="border border-primary">
+                <!-- Contact Form -->
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h2 class="text-3xl mb-4">Drop us a message</h2>
+                    <p class="text-black-600 mb-6">We'll respond as soon as possible.</p>
+                    <form>
+                        <div class="mb-4">
+                            <input type="text" placeholder="Full Name" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="Title" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" placeholder="Work Email" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" placeholder="Subject" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900">
+                        </div>
+                        <div class="mb-6">
+                            <textarea placeholder="Message" rows="4" class="w-full p-3 border rounded-md hover:border-blue-900 focus:border-blue-900"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="cta-button text-white px-6 py-2.5 rounded-full hover:shadow-lg">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </span>
         </div>
-        <div class="flex justify-center space-x-6 mb-4">
-            <a href="#" class="hover:text-blue-500 transition-colors duration-300">Terms and Conditions</a>
-            <a href="#" class="hover:text-blue-500 transition-colors duration-300">Privacy Policy</a>
+    </section>
+    <!-- Footer Section -->
+    <footer class="mt-16 bg-gray-900 text-white py-6">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold">OTA Recon</h2>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-blue-500 transition-colors duration-300">Terms and Conditions</a>
+                <a href="#" class="hover:text-blue-500 transition-colors duration-300">Privacy Policy</a>
+            </div>
+            <p>&copy; 2023 OTA Recon. All rights reserved.</p>
         </div>
-        <p>&copy; 2023 OTA Recon. All rights reserved.</p>
-    </div>
-	</footer>
+    </footer>
 
-      <!-- JavaScript -->
-      <script>
-	  document.addEventListener('DOMContentLoaded', function() {
-    const header = document.querySelector('header');
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navLinks = navMenu.querySelectorAll('a');
-    const navButton = navMenu.querySelector('button');
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.querySelector('header');
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('navMenu');
+            const navLinks = navMenu.querySelectorAll('a');
+            const navButton = navMenu.querySelector('button');
 
-    // Toggle menu visibility when menuToggle is clicked
-    menuToggle.addEventListener('click', function() {
-        menuToggle.classList.toggle('active');
-        navMenu.classList.toggle('hidden');
-    });
+            // Toggle menu visibility when menuToggle is clicked
+            menuToggle.addEventListener('click', function () {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('hidden');
+            });
 
-    // Hide the navMenu when a menu item is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.add('hidden');
-            menuToggle.classList.remove('active');
+            // Hide the navMenu when a menu item is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    navMenu.classList.add('hidden');
+                    menuToggle.classList.remove('active');
+                });
+            });
+
+            // Optional: Hide the navMenu when the "Book a Demo" button inside it is clicked
+            navButton.addEventListener('click', function () {
+                navMenu.classList.add('hidden');
+            });
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 0) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Adjust the scroll position after clicking an anchor link
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Get the height of the navbar
+                    const navbarHeight = document.querySelector('header').offsetHeight;
+
+                    // Get the section to scroll to
+                    const section = document.querySelector(this.getAttribute('href'));
+
+                    // Calculate the position more accurately
+                    const position = section.offsetTop - navbarHeight; // Removed the additional +30 pixels
+
+                    // Scroll to the section, offset by the navbar height
+                    window.scrollTo({
+                        top: position,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
         });
-    });
 
-    // Optional: Hide the navMenu when the "Book a Demo" button inside it is clicked
-    navButton.addEventListener('click', function() {
-        navMenu.classList.add('hidden');
-    });
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 0) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // Adjust the scroll position after clicking an anchor link
-	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-		anchor.addEventListener('click', function(e) {
-			e.preventDefault();
-			
-			// Get the height of the navbar
-			const navbarHeight = document.querySelector('header').offsetHeight;
-
-			// Get the section to scroll to
-			const section = document.querySelector(this.getAttribute('href'));
-
-			// Calculate the position
-			const position = section.offsetTop - navbarHeight+30;
-
-			// Scroll to the section, offset by the navbar height
-			window.scrollTo({
-				top: position,
-				behavior: 'smooth'
-			});
-		});
-	});
-});
-
-      </script>
-   </body>
+    </script>
+</body>
 </html>
